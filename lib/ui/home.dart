@@ -1,4 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+mylinkedin() {
+  print("object");
+  _launchURL("www.google.com");
+}
+
+_launchURL(url) async {
+  //const url = 'https://www.linkedin.com';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 myapp1() {
   var boxDecoration = BoxDecoration(
@@ -87,6 +103,29 @@ myapp1() {
       appBar: AppBar(
         title: Text("My Business Card"),
         //backgroundColor: Colors.indigoAccent[900],
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(FontAwesomeIcons.github),
+              onPressed: () {
+                _launchURL("https://github.com/azeemushanali");
+              }),
+          IconButton(
+              icon: Icon(FontAwesomeIcons.linkedin),
+              onPressed: () {
+                _launchURL("https://www.linkedin.com/in/azeemushan-ali/");
+              }),
+          IconButton(
+              icon: Icon(Icons.alternate_email),
+              onPressed: () {
+                _launchURL(
+                    "mailto:azeemushanali@gmail.com?subject=Nice%20App%20Azeem&body=My%20Feedback%20is");
+              }),
+          IconButton(
+              icon: Icon(Icons.add_call),
+              onPressed: () {
+                _launchURL("tel:+919876543210");
+              }),
+        ],
       ),
       body: mybody,
     ),
